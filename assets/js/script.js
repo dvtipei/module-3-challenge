@@ -5,6 +5,74 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword(); //return statement
   var passwordText = document.querySelector("#password"); 
+  var enter;
+  var enterNumber;
+  var enterCharacter;
+  var enterUppercase;
+  var enterLowercase
+
+number = [0,1,2,3,4,5,6,7,8,9]
+
+character = ["!","@","#","$","%","^","&","*","+","?",",","."];
+
+alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+space = [];
+
+var choices;
+
+var toUpper =function (event) {
+  return event.toUpperCase();
+};
+
+alpha2 = alpha.map(toUpper);
+
+var generate = document.querySelector("#generate");
+
+generate.addEventListener("click", function () {
+  ps = generatePassword();
+  document.getElementById("password").ariaPlaceholder = ps;
+});
+
+function generatePassword () {
+  enter = parseInt(prompt("Choose how many characters you would like your password to be: Between 8 and 128 characters"));
+  if (!enter) {
+    alert("This needs a value"); 
+  } else if (enter < 8 || enter > 128) {
+    enter = parseIn(prompt("You need to choose between 8 and 128 characters"));
+  } else {
+    enterNumber = confirm("Will it contain numbers?"); 
+    enterCharacter = confirm("Will it contain characters?"); 
+    enterUppercase = confirm("Will it contain uppercase letters?"); 
+    enterLowercase = confirm("Will it contain lowercase numbers?"); 
+  };
+
+  if (!enterCharacter && !enterNumber && !enterUppercase && !enterLowercase) {
+    choices = alter("You have to choose a criteria!")
+  }
+  else if (enterCharacter && enterNumber && enterUppercase && enterLowercase) {
+    choices = character.concat(number, alpha, alpha2);
+  }
+  else if (enterCharacter && enterNumber && enterUppercase) {
+    choices = character.concat(number, alpha2);
+  }
+  else if (enterCharacter && enterNumber && enterLowercase) {
+    choices = character.concat(number, alpha);
+  }
+  else if (enterCharacter && enterLowercase && enterUppercase) {
+    choices = character.concat(alpha, alpha2);
+  }
+  else if (enterNumber && enterLowercase && enterUppercase) {
+    choices = number.concat(alpha, alpha2);
+  }
+  else if (enterCharacter && enterNumber) {
+    choices = character.concat(number);
+  }
+  
+}
+
+
+
 
   passwordText.value = password;
 
