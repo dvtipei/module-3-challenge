@@ -1,15 +1,8 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword(); //return statement
-  var passwordText = document.querySelector("#password"); 
-  var enter;
-  var enterNumber;
-  var enterCharacter;
-  var enterUppercase;
-  var enterLowercase
+var enter;
+var enterNumber;
+var enterCharacter;
+var enterUppercase;
+var enterLowercase
 
 number = [0,1,2,3,4,5,6,7,8,9]
 
@@ -21,17 +14,17 @@ space = [];
 
 var choices;
 
-var toUpper =function (event) {
+var toUpper = function (event) {
   return event.toUpperCase();
 };
 
 alpha2 = alpha.map(toUpper);
 
-var generate = document.querySelector("#generate");
+var get = document.querySelector("#generate");
 
-generate.addEventListener("click", function () {
+get.addEventListener("click", function () {
   ps = generatePassword();
-  document.getElementById("password").ariaPlaceholder = ps;
+  document.getElementById("password").placeholder = ps;
 });
 
 function generatePassword () {
@@ -39,7 +32,7 @@ function generatePassword () {
   if (!enter) {
     alert("This needs a value"); 
   } else if (enter < 8 || enter > 128) {
-    enter = parseIn(prompt("You need to choose between 8 and 128 characters"));
+    enter = parseInt(prompt("You need to choose between 8 and 128 characters"));
   } else {
     enterNumber = confirm("Will it contain numbers?"); 
     enterCharacter = confirm("Will it contain characters?"); 
@@ -48,7 +41,7 @@ function generatePassword () {
   };
 
   if (!enterCharacter && !enterNumber && !enterUppercase && !enterLowercase) {
-    choices = alter("You have to choose a criteria!")
+    choices = alert("You have to choose a criteria!")
   }
   else if (enterCharacter && enterNumber && enterUppercase && enterLowercase) {
     choices = character.concat(number, alpha, alpha2);
@@ -68,19 +61,47 @@ function generatePassword () {
   else if (enterCharacter && enterNumber) {
     choices = character.concat(number);
   }
-  
+  else if (enterCharacter && enterLowercase) {
+    choices = character.concat(alpha);
+  }
+  else if (enterCharacter && enterUppercase) {
+    choices = character.concat(alpha2);
+  }
+  else if (enterLowercase && enterNumber) {
+    choices = alpha.concat(number);
+  }
+  else if (enterLowercase && enterUppercase) {
+    choices = alpha.concat(alpha2);
+  }
+  else if (enterNumber && enterUppercase) {
+    choices = number.concat(alpha2);
+  }
+  else if (enterCharacter) {
+    choices = character;
+  }
+  else if (enterNumber) {
+    choices = number;
+  }
+  else if (enterLowercase) {
+    choices = alpha;
+  }
+  else if (enterUppercase) {
+    choices = space.concat(alpha2);
+  }
+  var password = [];
+
+  for (var i = 0; i < enter; i++) {
+    var pickChoices = choices[Math.floor(Math.random() * choices.length)];
+    password.push(pickChoices);
+  }
+  var ps = password.join("")
+  UserInput(ps);
+  return ps;
 }
 
-
-
-
-  passwordText.value = password;
-
+function UserInput(ps) {
+  document.getElementById("password").textContent = ps;
 }
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
 
 // GIVEN I need a new, secure password
 // WHEN I click the button to generate a password
