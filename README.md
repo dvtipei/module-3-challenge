@@ -11,7 +11,7 @@
 
 ### Screenshot
 
-[screenshot](generatepasswordscreenshot.png)
+![screenshot](generatepasswordscreenshot.png)
 
 ### Link
-[module3challenge](https://github.com/dvtipei/module-3-challenge)
+![module3challenge](https://github.com/dvtipei/module-3-challenge)
